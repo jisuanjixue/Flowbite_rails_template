@@ -1,0 +1,32 @@
+{
+  "name": "app",
+  "private": "true",
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/turbo-rails": "^7.3.0",
+    "esbuild": "^0.16.15",
+    "tailwindcss": "^3.3.3",
+    "tailwindcss-animate": "^1.0.6"
+  },
+  "devDependencies": {
+    "@prettier/plugin-ruby": "^3.2.2",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.9",
+    "chokidar": "^3.5.3",
+    "esbuild-plugin-stimulus": "^0.1.5",
+    "esbuild-rails": "^1.0.3",
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-tailwindcss": "^3.6.2",
+    "intersection-observer": "^0.12.2",
+    "prettier": "^3.0.0"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js --cache .",
+    "build": "node esbuild.config.js",
+    "build:css": "tailwindcss -i ./app/assets/stylesheets/application.tailwind.css -o ./app/assets/builds/application.css --minify"
+  }
+}
