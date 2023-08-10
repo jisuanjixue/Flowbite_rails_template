@@ -5,6 +5,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "@hotwired/turbo-rails": "^7.3.0",
     "esbuild": "^0.16.15",
+    "flowbite": "^1.8.1",
     "tailwindcss": "^3.3.3",
     "tailwindcss-animate": "^1.0.6"
   },
