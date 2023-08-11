@@ -32,6 +32,9 @@ module ShadcnRailsTemplate
     # config.eager_load_paths << Rails.root.join("extras")
 
     # Don't generate system test files.
+    config.active_job.queue_adapter = :sidekiq
+    config.active_job.queue_name_prefix = "an_optional_queue_prefix"
+    
     config.generators.after_generate do |files|
       parsable_files = files.filter { |file| file.end_with?('.rb') }
       system("bundle exec rubocop -A --fail-level=E #{parsable_files.shelljoin}", exception: true)
