@@ -1,0 +1,6 @@
+<h3>Create a post</h3>
+<%= form_with model: @post do |form| %>
+  <%= form.text_field :title, placeholder: "title" %>
+  <%= form.text_field :description, placeholder: "description" %>
+  <%= form.submit %>
+<% end %>

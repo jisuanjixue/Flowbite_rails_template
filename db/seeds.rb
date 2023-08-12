@@ -3,5 +3,6 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
+user = User.create!(email: "20668323@qq.com", password: "abcd123")
+Post.create([{ title: "Star Wars", description: "aaaa", user_id: user.id }])
 #   Character.create(name: "Luke", movie: movies.first)

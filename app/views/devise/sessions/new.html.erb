@@ -1,3 +1,31 @@
+<!-- <h2>Log in</h2>
+
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password, autocomplete: "current-password" %>
+  </div>
+
+  <% if devise_mapping.rememberable? %>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label :remember_me %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Log in" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %> -->
+
+
 <section class="bg-gray-50 dark:bg-gray-900">
   <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
     <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
@@ -7,18 +35,19 @@
     <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">Sign in to your account</h1>
-        <form class="space-y-4 md:space-y-6">
+        <div class="space-y-4 md:space-y-6">
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
           <div>
-            <%= f.label :email, for: "email", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> <%= f.email_field :email, type:"email", name:"email", id: "email",
-            class:"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
-            dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            <%= f.label :email, for: "email", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> 
+            <%= f.email_field :email, type:"email", id: "email", class:"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+            dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", autofocus: true, autocomplete: "email" %>
           </div>
 
           <div>
-            <%= f.label :password, for:"password", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> <%= f.password_field :password, type:"password", name:"password",
+            <%= f.label :password, for:"password", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> 
+            <%= f.password_field :password, type:"password",
             id:"password", placeholder:"••••••••", class:"bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5
-            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+            dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", autocomplete: "current-password" %>
           </div>
 
           <% if devise_mapping.rememberable? %>
@@ -43,8 +72,8 @@
             Don’t have an account yet? <a href="/users/sign_up" class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
           </p>
           <% end %>
-          <!-- <%= render "devise/shared/links" %> -->
-        </form>
+          <%= render "devise/shared/links" %>
+        </div>
       </div>
     </div>
   </div>
