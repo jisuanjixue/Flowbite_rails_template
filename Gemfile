@@ -61,7 +61,6 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-  gem 'standard'
   gem 'erb_lint', '~> 0.4.0', require: false
   gem 'better_html', '~> 2.0', '>= 2.0.2'
 end
