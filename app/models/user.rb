@@ -6,6 +6,7 @@ class User < ApplicationRecord
           :recoverable, 
           :rememberable, 
           :validatable, 
+          :omniauthable,
           authentication_keys: [:login]
 
   validates :email, uniqueness: true
@@ -13,6 +14,15 @@ class User < ApplicationRecord
   validate :validate_username
 
   attr_writer :login
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |user |
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+    end
+  end
 
   def login
     @login || username || email
