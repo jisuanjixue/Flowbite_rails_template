@@ -3,6 +3,6 @@
 #
 # Examples:
 #
-user = User.create!(email: "20668323@qq.com", password: "abcd123")
+user = User.create!(username: "bobo", email: "20668323@qq.com", password: "abcd123", password_confirmation: "abcd123", remember_me: true)
 Post.create([{ title: "Star Wars", description: "aaaa", user_id: user.id }])
 #   Character.create(name: "Luke", movie: movies.first)
