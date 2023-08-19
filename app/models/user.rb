@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_one_attached :avatar, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,
@@ -12,6 +13,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validate :validate_username
+  validate :acceptable_image
 
   attr_writer :login
 
@@ -31,7 +33,16 @@ class User < ApplicationRecord
   def validate_username
     return unless User.where(email: username).exists?
       errors.add(:username, :invalid)
-    
+  end
+
+  def acceptable_image
+    return unless avatar.attached?
+    return if avatar.blob.byte_size <= 1.megabyte
+      errors.add(:avatar, "is too big")
+      acceptable_types = ["image/jpeg", "image/png"]
+      return if acceptable_types.include?(main_image.content_type)
+        errors.add(:main_image, "must be a JPEG or PNG")
+      
   end
 
 
