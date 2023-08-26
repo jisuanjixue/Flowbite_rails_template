@@ -8,6 +8,7 @@ class User < ApplicationRecord
           :rememberable, 
           :validatable, 
           :omniauthable,
+          omniauth_providers: %i[github],
           authentication_keys: [:login]
 
   validates :email, uniqueness: true
