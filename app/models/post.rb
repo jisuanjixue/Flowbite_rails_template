@@ -2,6 +2,7 @@ class Post < ApplicationRecord
   extend FriendlyId
   validates :title, presence: true
   belongs_to :user
+  has_rich_text :description
   enum :status, { draft: 0, underway: 1, done: 2, archived: 3 }
 
   friendly_id :title, use: %i[slugged history finders]
