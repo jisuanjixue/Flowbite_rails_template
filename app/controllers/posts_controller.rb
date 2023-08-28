@@ -67,6 +67,7 @@ private
     # the request slug will not match the current slug, and we should do
     # a 301 redirect to the new path
     # redirect_to @post, status: :ok
+    redirect_to @post, status: :moved_permanently if params[:id] != @post.slug
   end
 
 def post_params

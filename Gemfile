@@ -93,3 +93,5 @@ gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 gem 'authtrail', '~> 0.5.0'
 
 gem 'image_processing', '~> 1.2'
+
+gem 'friendly_id', '~> 5.4.0'
