@@ -1,0 +1,34 @@
+<section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+  <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
+    <!-- Start coding here -->
+    <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+      <div class="overflow-x-auto">
+        <%= turbo_frame_tag "table_#{table.attachable_sgid}", data: {controller: "table-editor", table_editor_url_value: table_path(id: table.attachable_sgid)} do %>
+           <div style="display: flex">
+               <%= button_to "+ Row", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "addRow"} %>
+               <%= button_to "- Row", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "removeRow"} %>
+               <%= button_to "+ Column", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "addColumn"} %>
+               <%= button_to "- Column", table_path(id: table.attachable_sgid), method: :patch, params: {operation: "removeColumn"} %>
+             </div>
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <tbody>
+            <% table.content.each_with_index do |row, row_index| %>
+            <tr class="border-b dark:border-gray-700">
+              <% row.each_with_index do |column, column_index| %>
+              <td class="px-4 py-3">
+                 data-action="input->table-editor#updateCell"
+               data-row-index="<%= row_index %>"
+               data-column-index="<%= column_index %>">
+               <%= column %>
+             </div>
+              </div></td>
+              <% end %>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
