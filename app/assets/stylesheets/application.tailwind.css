@@ -1,3 +1,4 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;@import 'actiontext.css';
+@tailwind utilities;
+@import 'actiontext.css';
