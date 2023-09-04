@@ -6,3 +6,9 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import TableEditorController from "./table_editor_controller"
+application.register("table-editor", TableEditorController)
+
+import TrixTableController from "./trix_table_controller"
+application.register("trix-table", TrixTableController)

@@ -3,6 +3,7 @@
   "private": "true",
   "dependencies": {
     "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/stimulus-webpack-helpers": "^1.0.1",
     "@hotwired/turbo-rails": "^7.3.0",
     "@rails/actiontext": "^7.0.7-2",
     "@rails/request.js": "^0.0.8",
