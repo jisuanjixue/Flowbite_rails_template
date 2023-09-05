@@ -27,6 +27,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_rich_text :description
   enum :status, { draft: 0, underway: 1, done: 2, archived: 3 }
+  has_many_attached :images
 
   friendly_id :title, use: %i[slugged history finders]
 

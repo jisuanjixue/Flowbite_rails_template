@@ -1,9 +1,18 @@
-const chokidar = require('chokidar');
-const esbuild = require('esbuild');
-const rails = require('esbuild-rails');
-const http = require('http');
-const path = require('path');
-const { stimulusPlugin } = require('esbuild-plugin-stimulus');
+import babel from 'esbuild-plugin-babel';
+import chokidar from 'chokidar';
+import esbuild from 'esbuild';
+import rails from 'esbuild-rails';
+import http from 'http';
+import path  from 'path';
+import {stimulusPlugin} from 'esbuild-plugin-stimulus';
+
+// const chokidar = require('chokidar');
+// const esbuild = require('esbuild');
+// const rails = require('esbuild-rails');
+// const babel = require('esbuild-plugin-babel');
+// const http = require('http');
+// const path = require('path');
+// const { stimulusPlugin } = require('esbuild-plugin-stimulus');
 
 const clients = [];
 const watch = process.argv.includes('--watch');
@@ -23,8 +32,20 @@ const config = {
   outdir: path.join(process.cwd(), 'app/assets/builds'),
   absWorkingDir: path.join(process.cwd(), 'app/javascript'),
   watch: process.argv.includes('--watch'),
-  plugins: [rails(), stimulusPlugin()],
+  plugins: [
+       // Plugin to easily import Rails JS files, such as Stimulus controllers and channels
+      // https://github.com/excid3/esbuild-rails
+    rails(),
+     stimulusPlugin(), 
+      // Configures bundle with Babel. Babel configuration defined in babel.config.js
+        // Babel translates JS code to make it compatible with older JS versions.
+        // https://github.com/nativew/esbuild-plugin-babel
+    babel()],
   sourcemap: true,
+  logLevel: 'info',
+  treeShaking: true,
+  splitting: false,
+  chunkNames: 'chunks/[name]-[hash]',
   incremental: watch,
   banner: { js: bannerJs },
   define: {

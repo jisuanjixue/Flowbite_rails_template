@@ -5,3 +5,4 @@ import "./controllers";
 import Trix from "trix";
 import "@rails/actiontext";
 
+

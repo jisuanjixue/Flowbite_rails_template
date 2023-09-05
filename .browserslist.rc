@@ -1,0 +1,9 @@
+# Babel Preset configuration
+# --------------------------
+# Defines web-browser compatibility parameters for Babel to transpile your JS code.
+# This configuration is used by babel.config.js.
+# More information in here.
+# https://github.com/browserslist/browserslist
+
+# Support browsers with a market share higher than 5%
+>10%
