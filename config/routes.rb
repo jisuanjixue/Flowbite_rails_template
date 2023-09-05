@@ -6,7 +6,10 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  resources :posts 
+  resources :posts do
+    resources :comments
+  end
+  
   resources :tables
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

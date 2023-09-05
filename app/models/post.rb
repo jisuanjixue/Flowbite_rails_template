@@ -28,6 +28,7 @@ class Post < ApplicationRecord
   has_rich_text :description
   enum :status, { draft: 0, underway: 1, done: 2, archived: 3 }
   has_many_attached :images
+  has_many :comments, dependent: :destroy
 
   has_noticed_notifications model_name: 'Notification'
   has_many :notifications, through: :user
