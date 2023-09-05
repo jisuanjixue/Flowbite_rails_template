@@ -95,3 +95,7 @@ gem 'authtrail', '~> 0.5.0'
 gem 'image_processing', '~> 1.2'
 
 gem 'friendly_id', '~> 5.4.0'
+
+gem "noticed", "~> 1.6"
+
+gem "cable_ready", "~> 5.0"

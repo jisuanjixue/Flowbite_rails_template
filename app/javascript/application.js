@@ -6,3 +6,4 @@ import Trix from "trix";
 import "@rails/actiontext";
 
 
+import "./channels"

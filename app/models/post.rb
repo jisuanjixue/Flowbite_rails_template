@@ -29,6 +29,9 @@ class Post < ApplicationRecord
   enum :status, { draft: 0, underway: 1, done: 2, archived: 3 }
   has_many_attached :images
 
+  has_noticed_notifications model_name: 'Notification'
+  has_many :notifications, through: :user
+
   friendly_id :title, use: %i[slugged history finders]
 
   def should_generate_new_friendly_id?

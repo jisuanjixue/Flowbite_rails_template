@@ -1198,6 +1198,11 @@
   resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.0.6.tgz#60765c8e9c357a0ba0840fb1e409caedc233ea0d"
   integrity sha512-ybBsUrIsu5geM8BtqnpM7ZA9D8uzSz+e1B4JR57NaCmasHKWap6AX5DT7NHIbp21opVet1qqoVSdsoLDqXeB2A==
 
+"@rails/actioncable@^7.0.7-2":
+  version "7.0.7-2"
+  resolved "https://registry.yarnpkg.com/@rails/actioncable/-/actioncable-7.0.7-2.tgz#c2a28d64720d2b44e421a1b3790070d5fc3f2da2"
+  integrity sha512-7irihOFG//9Z4kBuiwH+VqSfiCdOLcuhC0/y7QcxOC9R08QE5Hq7N+ex2o3SkqiszbmMh7tlj88V+y+Kt/TPmA==
+
 "@rails/actiontext@^7.0.7-2":
   version "7.0.7-2"
   resolved "https://registry.yarnpkg.com/@rails/actiontext/-/actiontext-7.0.7-2.tgz#32a78cd9cbc1a00b0d240a8299e2d3fb4a1eabdd"
@@ -1376,6 +1381,13 @@ browserslist@^4.21.10, browserslist@^4.21.9:
     electron-to-chromium "^1.4.477"
     node-releases "^2.0.13"
     update-browserslist-db "^1.0.11"
+
+cable_ready@4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/cable_ready/-/cable_ready-4.5.0.tgz#1207218dd16934d12addfbd34c26ead853570672"
+  integrity sha512-9bom1DuYe1teBdRckgKWjg+rWRLWrkOvkhzlXkhb33X+Pfu/QK9e4vGk6hGK9PVKVr0SYZC41dByFGknW4spLg==
+  dependencies:
+    morphdom "^2.6.1"
 
 callsites@^3.0.0:
   version "3.1.0"
@@ -2073,6 +2085,11 @@ minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   dependencies:
     brace-expansion "^1.1.7"
+
+morphdom@^2.6.1:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/morphdom/-/morphdom-2.7.0.tgz#9ef0c4bc15ac8725df398d127c6984f62e7f89e8"
+  integrity sha512-8L8DwbdjjWwM/aNqj7BSoSn4G7SQLNiDcxCnMWbf506jojR6lNQ5YOmQqXEIE8u3C492UlkN4d0hQwz97+M1oQ==
 
 ms@2.1.2:
   version "2.1.2"
