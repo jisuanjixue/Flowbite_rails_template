@@ -20,16 +20,15 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
-    belongs_to :user
-    belongs_to :post, counter_cache: true
-    has_rich_text :body
+  belongs_to :post, counter_cache: true
+  belongs_to :user
+  has_rich_text :body
 
-    after_create_commit :notify_recipient
-    before_destroy :cleanup_notifications
+  after_create_commit :notify_recipient
+  before_destroy :cleanup_notifications
+  has_noticed_notifications model_name: 'Notification'
 
-    has_noticed_notifications model_name: 'Notification'
-
-    private
+  private
 
   def notify_recipient
     return if post.user == user
