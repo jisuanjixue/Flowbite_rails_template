@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20230906005832
+# Schema version: 20230906035959
 #
 # Table name: posts
 #
@@ -9,6 +9,7 @@
 #  slug           :string
 #  status         :integer
 #  title          :string
+#  views          :integer          default(0)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  user_id        :bigint           not null

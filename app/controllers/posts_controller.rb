@@ -7,8 +7,9 @@ def index
  end
 
  def show
+  @post.update(views: @post.views + 1)
   @comments = @post.comments.includes(:user).order(created_at: :desc)
-    mark_notifications_as_read
+  mark_notifications_as_read
  end
  
  

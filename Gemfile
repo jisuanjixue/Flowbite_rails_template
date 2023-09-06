@@ -99,3 +99,5 @@ gem 'friendly_id', '~> 5.4.0'
 gem "noticed", "~> 1.6"
 
 gem "cable_ready", "~> 5.0"
+
+gem "byebug", "~> 11.1", :groups => [:development, :test]

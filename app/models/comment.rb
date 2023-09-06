@@ -32,7 +32,7 @@ class Comment < ApplicationRecord
 
   def notify_recipient
     return if post.user == user
-
+    byebug
     CommentNotification.with(comment: self, post:).deliver_later(post.user)
   end
 
