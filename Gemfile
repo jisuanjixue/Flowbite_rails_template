@@ -101,3 +101,5 @@ gem "noticed", "~> 1.6"
 gem "cable_ready", "~> 5.0"
 
 gem "byebug", "~> 11.1", :groups => [:development, :test]
+
+gem "ahoy_matey", "~> 4.2"
