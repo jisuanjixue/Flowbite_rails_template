@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     added_attrs = [:username, :email, :password, :password_confirmation]
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :sign_in, keys: [:login, :password]
-    devise_parameter_sanitizer.permit :account_update, keys:[:avatar, :username, :email, :password, :password_confirmation]
+    devise_parameter_sanitizer.permit :account_update, keys:[:avatar, :username, :email, :password, :password_confirmation, { address: %i[street city state zip country] }]
   end
 
   def set_notifications
@@ -21,4 +21,9 @@ class ApplicationController < ActionController::Base
     # def after_sign_in_path_for(_resource)
     #   posts_path
     # end
+
+    def after_sign_up_path_for(_resource)
+      # super(resource)
+      after_signup_path('set_name')
+    end
 end

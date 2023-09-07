@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
+  resources :after_signup
+
   resources :posts do
     resources :comments
   end

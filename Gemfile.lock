@@ -373,6 +373,8 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    wicked (2.0.0)
+      railties (>= 3.0.7)
     zeitwerk (2.6.11)
 
 PLATFORMS
@@ -419,6 +421,7 @@ DEPENDENCIES
   turbo-rails
   tzinfo-data
   web-console
+  wicked (~> 2.0)
 
 RUBY VERSION
    ruby 3.2.2p53
