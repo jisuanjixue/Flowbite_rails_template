@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20230906035959
+# Schema version: 20230908073820
 #
 # Table name: posts
 #
@@ -12,21 +12,25 @@
 #  views          :integer          default(0)
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  category_id    :bigint
 #  user_id        :bigint           not null
 #
 # Indexes
 #
-#  index_posts_on_slug     (slug) UNIQUE
-#  index_posts_on_user_id  (user_id)
+#  index_posts_on_category_id  (category_id)
+#  index_posts_on_slug         (slug) UNIQUE
+#  index_posts_on_user_id      (user_id)
 #
 # Foreign Keys
 #
+#  fk_rails_...  (category_id => categories.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
   extend FriendlyId
   validates :title, presence: true
   belongs_to :user
+  belongs_to :category
   has_rich_text :description
   enum :status, { draft: 0, underway: 1, done: 2, archived: 3 }
   has_many_attached :images

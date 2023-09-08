@@ -75,7 +75,7 @@ private
   end
 
 def post_params
-  params.require(:post).permit(:title, :description, images: [])
+  params.require(:post).permit(:title, :description, :category_id, images: [])
 end
 
 def mark_notifications_as_read
