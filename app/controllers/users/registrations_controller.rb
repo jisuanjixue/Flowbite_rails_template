@@ -7,9 +7,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -37,17 +37,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # protected
 
   # If you have extra params to permit, append them to the sanitizer.
 
   # If you have extra params to permit, append them to the sanitizer.
 
   # The path used after sign up.
-  # def after_sign_up_path_for(_resource)
-  #   # super(resource)
-  #   after_signup_path('set_name')
-  # end
+
 
   # The path used after sign up for inactive accounts.
   # def after_inactive_sign_up_path_for(resource)
@@ -55,6 +51,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   private
+
+  def after_sign_up_path_for(_resource)
+    # super(resource)
+    after_signup_path('set_name')
+  end
 
   def address_params
     params.require(:address).permit(:id, :street, :city, :state, :zip, :country)

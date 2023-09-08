@@ -105,3 +105,5 @@ gem "byebug", "~> 11.1", :groups => [:development, :test]
 gem "ahoy_matey", "~> 4.2"
 
 gem "wicked", "~> 2.0"
+
+gem "bullet", "~> 7.0"
