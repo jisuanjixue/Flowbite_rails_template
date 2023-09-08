@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20230907060914
+# Schema version: 20230908064420
 #
 # Table name: users
 #
@@ -10,6 +10,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :integer
 #  uid                    :string
 #  username               :string
 #  views                  :integer
@@ -48,6 +49,9 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validate :validate_username
   validate :acceptable_image
+  enum role: {user: 0, admin: 1} 
+
+  after_initialize :set_default_role, if: :new_record?
 
   attr_writer :login
 
@@ -114,6 +118,12 @@ class User < ApplicationRecord
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end
+  end
+
+  private
+
+  def set_default_role
+    self.role ||= :user
   end
 
 end

@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20230907060914
+# Schema version: 20230908064420
 #
 # Table name: users
 #
@@ -10,6 +10,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  role                   :integer
 #  uid                    :string
 #  username               :string
 #  views                  :integer
