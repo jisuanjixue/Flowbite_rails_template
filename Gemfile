@@ -107,3 +107,7 @@ gem "ahoy_matey", "~> 4.2"
 gem "wicked", "~> 2.0"
 
 gem "bullet", "~> 7.0"
+
+gem "apexcharts", "~> 0.2.0"
+
+gem "groupdate", "~> 6.3"

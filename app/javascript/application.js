@@ -4,6 +4,7 @@ import "@hotwired/turbo-rails"
 import "./controllers";
 import Trix from "trix";
 import "@rails/actiontext";
-
-
+import ApexCharts from 'apexcharts'
 import "./channels"
+
+window.ApexCharts = ApexCharts

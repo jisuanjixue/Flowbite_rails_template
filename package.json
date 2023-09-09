@@ -10,6 +10,7 @@
     "@rails/actiontext": "^7.0.7-2",
     "@rails/activestorage": "^7.0.7-2",
     "@rails/request.js": "^0.0.8",
+    "apexcharts": "^3.42.0",
     "cable_ready": "4.5.0",
     "dropzone": "^6.0.0-beta.2",
     "esbuild": "^0.16.15",

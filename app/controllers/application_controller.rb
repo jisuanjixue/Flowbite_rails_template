@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
     before_action :set_notifications, if: :current_user
 
+    def is_admin?
+      return if current_user&.admin?
+        flash[:alert] = 'You are not authorized to perform this action.'
+        redirect_to root_path
+      
+    end
+
   protected
 
   def configure_permitted_parameters
@@ -18,7 +25,5 @@ class ApplicationController < ActionController::Base
     @read = notifications.read
   end
 
-    # def after_sign_in_path_for(_resource)
-    #   posts_path
-    # end
+  
 end
