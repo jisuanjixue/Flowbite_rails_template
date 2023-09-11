@@ -65,6 +65,36 @@ def seed_posts_and_comments
   end
 end
 
+def seed_ahoy
+  Ahoy.geocode = false
+  request = OpenStruct.new(
+    params: {},
+    referer: 'http://example.com',
+    remote_ip: '0.0.0.0',
+    user_agent: 'Internet Explorer, lol can you imagine?',
+    original_url: 'rails'
+  )
+
+  visit_properties = Ahoy::VisitProperties.new(request, api: nil)
+  properties = visit_properties.generate.select { |_, v| v }
+
+  example_visit = Ahoy::Visit.create!(properties.merge(
+                                        visit_token: SecureRandom.uuid,
+                                        visitor_token: SecureRandom.uuid
+                                      ))
+
+  2.months.ago.to_date.upto(Date.today) do |date|
+    Post.all.each do |post|
+      rand(1..5).times do |_x|
+        Ahoy::Event.create!(name: 'Viewed Post',
+                            visit: example_visit,
+                            properties: { post_id: post.id },
+                            time: date.to_time + rand(0..23).hours + rand(0..59).minutes)
+      end
+    end
+  end
+end
+
 
 elapsed = Benchmark.measure do
   puts 'Seeding development database...'
@@ -72,6 +102,7 @@ elapsed = Benchmark.measure do
   seed_addresses
   seed_categories
   seed_posts_and_comments
+  seed_ahoy
 end
 
 puts "Seeded development DB in #{elapsed.real} seconds"
