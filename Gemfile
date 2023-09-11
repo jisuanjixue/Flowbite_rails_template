@@ -113,3 +113,7 @@ gem "apexcharts", "~> 0.2.0"
 gem "groupdate", "~> 6.3"
 
 gem "activerecord-import", "~> 1.5"
+
+gem "amazing_print", "~> 1.5"
+
+gem "rails_semantic_logger", "~> 4.12"
