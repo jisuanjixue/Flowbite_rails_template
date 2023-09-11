@@ -2,7 +2,8 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { Application } from "@hotwired/stimulus"
+import { Application } from "@hotwired/stimulus";
+import { IntersectionController } from 'stimulus-use';
 
 // General Controllers
 // -------------------
@@ -34,12 +35,9 @@ controllers.forEach((controller) => {
     Stimulus.register(controllerName(controller.name), controller.module.default)
 })
 
+application.register('intersection', IntersectionController);
 
-// import HelloController from "./hello_controller"
-// application.register("hello", HelloController)
-
-// import TableEditorController from "./table_editor_controller"
-// application.register("table-editor", TableEditorController)
-
-// import TrixTableController from "./trix_table_controller"
-// application.register("trix-table", TrixTableController)
+document.documentElement.setAttribute(
+    'data-theme',
+    window.localStorage.getItem('theme'),
+);  

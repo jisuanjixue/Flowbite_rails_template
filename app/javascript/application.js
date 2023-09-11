@@ -7,4 +7,5 @@ import "@rails/actiontext";
 import ApexCharts from 'apexcharts'
 import "./channels"
 
+
 window.ApexCharts = ApexCharts
