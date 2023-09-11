@@ -111,3 +111,5 @@ gem "bullet", "~> 7.0"
 gem "apexcharts", "~> 0.2.0"
 
 gem "groupdate", "~> 6.3"
+
+gem "activerecord-import", "~> 1.5"

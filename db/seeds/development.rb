@@ -63,6 +63,7 @@ def seed_posts_and_comments
 
     posts.push(post)
   end
+  Post.import(posts, recursive: true)
 end
 
 def seed_ahoy
