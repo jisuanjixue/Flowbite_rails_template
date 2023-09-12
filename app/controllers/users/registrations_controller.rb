@@ -7,9 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super
-  end
+  
 
   # GET /resource/edit
   # def edit
@@ -19,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     current_user.build_address(address_params) unless current_user.address
-    current_user.address.update(address_params)
+    current_user.address.update!(address_params)
     super
   end
 

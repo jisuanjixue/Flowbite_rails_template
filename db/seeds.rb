@@ -3,6 +3,6 @@
 #
 # Examples:
 #
-puts 'Seeding database'
+Rails.logger.debug 'Seeding database'
 load(Rails.root.join('db', 'seeds', "#{Rails.env.downcase}.rb"))
 #   Character.create(name: "Luke", movie: movies.first)

@@ -20,8 +20,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Comment < ApplicationRecord
-  belongs_to :post, counter_cache: true
-  belongs_to :user
+  db_belongs_to :post, counter_cache: true
+  db_belongs_to :user
   has_rich_text :body
 
   after_create_commit :notify_recipient

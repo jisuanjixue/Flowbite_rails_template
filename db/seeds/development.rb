@@ -7,13 +7,13 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 def seed_users
-  bobo = User.create(email: 'bobo@example.com',
+  User.create!(email: 'bobo@example.com',
                      password: '123456',
                      password_confirmation: '123456',
                      username: "bobo",
                      role: User.roles[:admin])
 
-  john = User.create(email: 'john@doe.com',
+  User.create!(email: 'john@doe.com',
                      password: '123456',
                      password_confirmation: '123456',
                      username: "bobo1",
@@ -21,13 +21,13 @@ def seed_users
 end
 
 def seed_addresses
-  Address.create(street: '123 Main St',
+  Address.create!(street: '123 Main St',
                  city: 'Anytown',
                  state: 'CA',
                  zip: '12345',
                  country: 'USA',
                  user: User.first)
-  Address.create(street: '123 Main St',
+  Address.create!(street: '123 Main St',
                  city: 'Anytown',
                  state: 'CA',
                  zip: '12345',
@@ -36,11 +36,11 @@ def seed_addresses
 end
 
 def seed_categories
-  Category.create(name: 'Uncategorized', show_nav: true)
-  Category.create(name: 'General', show_nav: true)
-  Category.create(name: 'Finance', show_nav: true)
-  Category.create(name: 'Health', show_nav: false)
-  Category.create(name: 'Education', show_nav: false)
+  Category.create!(name: 'Uncategorized', show_nav: true)
+  Category.create!(name: 'General', show_nav: true)
+  Category.create!(name: 'Finance', show_nav: true)
+  Category.create!(name: 'Health', show_nav: false)
+  Category.create!(name: 'Education', show_nav: false)
 end
 
 def seed_posts_and_comments
@@ -49,14 +49,14 @@ def seed_posts_and_comments
   john = User.second
   category = Category.first
   10.times do |x|
-    puts "Creating post #{x}"
+    Rails.logger.debug { "Creating post #{x}" }
     post = Post.new(title: "Title #{x}",
                     description: "Body #{x} Words go here Idk",
                     user: bobo,
                     category:)
 
     5.times do |y|
-      puts "Creating comment #{y} for post #{x} with user #{john.email}"
+      Rails.logger.debug { "Creating comment #{y} for post #{x} with user #{john.email}" }
       post.comments.build(body: "Comment #{y}",
                           user: john)
     end
@@ -84,7 +84,7 @@ def seed_ahoy
                                         visitor_token: SecureRandom.uuid
                                       ))
 
-  2.months.ago.to_date.upto(Date.today) do |date|
+  2.months.ago.to_date.upto(Time.zone.today) do |date|
     Post.all.each do |post|
       rand(1..5).times do |_x|
         Ahoy::Event.create!(name: 'Viewed Post',
@@ -98,7 +98,7 @@ end
 
 
 elapsed = Benchmark.measure do
-  puts 'Seeding development database...'
+  Rails.logger.debug 'Seeding development database...'
   seed_users
   seed_addresses
   seed_categories
@@ -106,4 +106,4 @@ elapsed = Benchmark.measure do
   seed_ahoy
 end
 
-puts "Seeded development DB in #{elapsed.real} seconds"
+Rails.logger.debug { "Seeded development DB in #{elapsed.real} seconds" }

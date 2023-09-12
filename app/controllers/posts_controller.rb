@@ -7,7 +7,7 @@ def index
  end
 
  def show
-  @post.update(views: @post.views + 1)
+  @post.update!(views: @post.views + 1)
   @comments = @post.comments.includes(:user).order(created_at: :desc)
   ahoy.track 'Viewed Post', post_id: @post.id
   mark_notifications_as_read
@@ -53,7 +53,7 @@ end
 
   # DELETE /posts/1 or /posts/1.json
   def destroy
-    @post.destroy
+    @post.destroy!
 
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }

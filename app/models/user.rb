@@ -47,7 +47,7 @@ class User < ApplicationRecord
           omniauth_providers: %i[github],
           authentication_keys: [:login]
 
-  validates :email, uniqueness: true
+  validates :email, db_uniqueness: { rescue: :always }
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validate :validate_username
   validate :acceptable_image
@@ -85,7 +85,7 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user |
+    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user |
       user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
@@ -98,7 +98,7 @@ class User < ApplicationRecord
   end
 
   def validate_username
-    return unless User.where(email: username).exists?
+    return unless User.exists?(email: username)
       errors.add(:username, :invalid)
   end
 
@@ -117,7 +117,7 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))
       where(conditions.to_h).where(["lower(username) = :value OR lower(email) = :value", { value: login.downcase }]).first
-    elsif conditions.has_key?(:username) || conditions.has_key?(:email)
+    elsif conditions.key?(:username) || conditions.key?(:email)
       where(conditions.to_h).first
     end
   end

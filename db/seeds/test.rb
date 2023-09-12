@@ -1,1 +1,1 @@
-puts 'Seeding test database...'
+Rails.logger.debug 'Seeding test database...'

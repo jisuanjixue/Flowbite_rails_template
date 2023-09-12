@@ -5,7 +5,7 @@ class TablesController < ApplicationController
    def edit
    end
   def create
-    @table = ActionText::Table.create
+    @table = ActionText::Table.create!
  
     render json: {
       sgid: @table.attachable_sgid,
@@ -24,7 +24,7 @@ class TablesController < ApplicationController
       when "removeColumn"
         @table.remove_column
       when "updateCell"
-        @table.content[params["row_index"].to_i][params["column_index"].to_i] = params["value"]
+        @table.content[Integer(params["row_index"], 10)][Integer(params["column_index"], 10)] = params["value"]
       else
         flash.alert = "Unknown table operation: #{params["operation"]}"
       end

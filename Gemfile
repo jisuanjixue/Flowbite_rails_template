@@ -69,6 +69,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
+  gem 'database_consistency'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -101,7 +102,7 @@ gem "noticed", "~> 1.6"
 
 gem "cable_ready", "~> 5.0"
 
-gem "byebug", "~> 11.1", :groups => [:development, :test]
+gem "byebug", "~> 11.1", groups: [:development, :test]
 
 gem "ahoy_matey", "~> 4.2"
 
@@ -120,3 +121,9 @@ gem "amazing_print", "~> 1.5"
 gem "rails_semantic_logger", "~> 4.12"
 
 gem "aws-sdk-s3", "~> 1.134"
+
+gem "database_validations", "~> 1.1"
+
+gem "strong_migrations", "~> 1.6"
+
+gem "brakeman", "~> 6.0"

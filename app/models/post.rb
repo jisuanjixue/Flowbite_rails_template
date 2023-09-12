@@ -29,8 +29,8 @@
 class Post < ApplicationRecord
   extend FriendlyId
   validates :title, presence: true
-  belongs_to :user
-  belongs_to :category
+  db_belongs_to :user
+  db_belongs_to :category
   has_rich_text :description
   enum :status, { draft: 0, underway: 1, done: 2, archived: 3 }
   has_many_attached :images
@@ -47,12 +47,12 @@ class Post < ApplicationRecord
 
   def views_by_day
     daily_events = Ahoy::Event.where("cast(properties ->> 'post_id' as bigint) = ?", id)
-    daily_events.group_by_day(:time, range: 1.month.ago..Time.now).count
+    daily_events.group_by_day(:time, range: 1.month.ago..Time.zone.now).count
   end
 
   def self.total_views_by_day
     daily_events = Ahoy::Event.where(name: 'Viewed Post')
-    daily_events.group_by_day(:time, range: 1.month.ago..Time.now).count
+    daily_events.group_by_day(:time, range: 1.month.ago..Time.zone.now).count
   end
 
   def self.total_series

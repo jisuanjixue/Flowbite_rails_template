@@ -32,7 +32,7 @@ class AfterSignupController < ApplicationController
       if @user.create_address(onboarding_params(step).except(:form_step))
         render_wizard @user
       else
-        @address.destroy
+        @address.destroy!
         render_wizard @user, status: :unprocessable_entity
       end
     end

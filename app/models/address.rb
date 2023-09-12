@@ -22,7 +22,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Address < ApplicationRecord
-  belongs_to :user, inverse_of: :address
+  db_belongs_to :user, inverse_of: :address
   validates :street, presence: true
   validates :city, presence: true
   validates :state, presence: true
