@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.erb": "erb",
+        "*.cjson": "jsonc",
+        "*.wxss": "css",
+        "*.wxs": "javascript",
+        "*.tsx": "typescriptreact",
+        "*.html.erb": "erb",
+        "*.css": "tailwindcss",
+        "*.rb": "ruby"
+      },
+      "[erb]": {
+        "editor.defaultFormatter": "aliariff.vscode-erb-beautify",
+        "editor.formatOnSave": true
+      },
+}

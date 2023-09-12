@@ -57,6 +57,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'htmlbeautifier'
   gem 'rubocop-performance', '~> 1.18'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
@@ -117,3 +118,5 @@ gem "activerecord-import", "~> 1.5"
 gem "amazing_print", "~> 1.5"
 
 gem "rails_semantic_logger", "~> 4.12"
+
+gem "aws-sdk-s3", "~> 1.134"

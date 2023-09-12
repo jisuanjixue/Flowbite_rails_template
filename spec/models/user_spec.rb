@@ -1,11 +1,13 @@
 # == Schema Information
-# Schema version: 20230908064420
+# Schema version: 20230912034307
 #
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  first_name             :string
+#  last_name              :string
 #  provider               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime

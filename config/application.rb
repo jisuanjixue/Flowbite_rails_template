@@ -42,7 +42,7 @@ module ShadcnRailsTemplate
     config.generators.system_tests = nil
 
     config.active_record.encryption.primary_key = "Q3TJUKuOUGSZmgqaD2WZ72pQdg5Rikfn"
-config.active_record.encryption.deterministic_key = "lYew1Q7BE98tDXdqytP3iwvJcu8dYulX"
-config.active_record.encryption.key_derivation_salt = "9REysw2kZuLybtKjtJsIZHg8cTd2DyMT"
+    config.active_record.encryption.deterministic_key = "lYew1Q7BE98tDXdqytP3iwvJcu8dYulX"
+    config.active_record.encryption.key_derivation_salt = "9REysw2kZuLybtKjtJsIZHg8cTd2DyMT"
   end
 end
