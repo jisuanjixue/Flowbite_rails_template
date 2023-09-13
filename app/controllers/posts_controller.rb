@@ -3,12 +3,12 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
  
 def index
-   @posts = Post.all.includes(:user).order(created_at: :desc)
+   @posts = Post.all.includes(:user, :rich_text_body).order(created_at: :desc)
  end
 
  def show
   @post.update!(views: @post.views + 1)
-  @comments = @post.comments.includes(:user).order(created_at: :desc)
+  @comments = @post.comments.includes(:user, :rich_text_body).order(created_at: :desc)
   ahoy.track 'Viewed Post', post_id: @post.id
   mark_notifications_as_read
  end

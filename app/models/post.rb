@@ -50,13 +50,10 @@ class Post < ApplicationRecord
     daily_events.group_by_day(:time, range: 1.month.ago..Time.zone.now).count
   end
 
-  def self.total_views_by_day
-    daily_events = Ahoy::Event.where(name: 'Viewed Post')
-    daily_events.group_by_day(:time, range: 1.month.ago..Time.zone.now).count
-  end
-
   def self.total_series
-    []
+    [
+      {name: "Inactive", data: Ahoy::Event.where(name: 'Viewed Post').group_by_day(:time, range: 1.month.ago..Time.zone.now).count}
+    ]
   end
 
   def self.total_options

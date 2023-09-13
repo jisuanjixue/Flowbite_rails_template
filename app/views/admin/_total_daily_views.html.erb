@@ -1,2 +1,2 @@
-<!-- <%= area_chart Post.total_views_by_day, colors: ["#a00a"] %> -->
-<%= area_chart(Post.total_series, {**Post.total_options, theme: 'palette5'}) %>
+
+<%= area_chart(Post.total_series, {**Post.total_options, theme: 'palette5', defer: true}) %>
