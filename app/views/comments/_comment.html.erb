@@ -1,33 +1,75 @@
-<div class="comment-<%= comment.id %> container"
-    style="border: 1px solid black; padding: 1em; margin: 1em;">
-  <%= comment.user.username %><br />
-  <% if (comment.updated_at - comment.created_at) > 1 %>
-    <span>Edited <%= time_ago_in_words(comment.updated_at) %> ago</span>
-  <% else %>
-    <span>Posted <%= time_ago_in_words(comment.created_at) %> ago</span>
-  <% end %>
-  <% if current_user == comment.user %>
-    <div class="btn-group float-end">
-      <%= link_to "Edit", nil, remote: true, class:"btn btn-warning",
-      data: {
-        controller: "comments",
-        action: "comments#toggleForm",
-        comments_form_param: "edit-form-#{comment.id}",
-        comments_body_param: "comment-body-#{comment.id}",
-        comments_edit_param: "edit-button-#{comment.id}"
-      },
-      id: "edit-button-#{comment.id}" %>
-      <%= button_to "Delete", [post, comment], class:"btn btn-danger", method: :delete %>
-    </div>
-    <div id="edit-form-<%= comment.id%>" class="d-none">
+<article class="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
+    <footer class="flex justify-between items-center mb-2">
+      <div class="flex items-center">
+        <p class="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">
+          <img class="mr-2 w-6 h-6 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Michael Gough" /> <%= comment.user.username %>
+        </p>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          <% if (comment.updated_at - comment.created_at) > 1 %>
+         <span>Edited <%= time_ago_in_words(comment.updated_at) %> ago</span>
+         <% else %>
+         <span>Posted <%= time_ago_in_words(comment.created_at) %> ago</span>
+         <% end %>
+        </time></p>
+      </div>
+       <% if current_user == comment.user %>
+      <button
+        id="dropdownComment1Button"
+        data-dropdown-toggle="dropdownComment1"
+        class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-500 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-50 dark:text-gray-400 dark:bg-gray-900 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        type="button"
+      >
+        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+          <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z" />
+        </svg>
+        <span class="sr-only">Comment settings</span>
+      </button>
+      <!-- Dropdown menu -->
+      <div id="dropdownComment1" class="hidden z-10 w-36 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownMenuIconHorizontalButton">
+          <li>
+            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                 <%= link_to "Edit", nil, remote: true, class:"btn btn-warning",
+                data: {
+                  controller: "comments",
+                  action: "comments#toggleForm",
+                  comments_form_param: "edit-form-#{comment.id}",
+                  comments_body_param: "comment-body-#{comment.id}",
+                  comments_edit_param: "edit-button-#{comment.id}"
+                },
+               id: "edit-button-#{comment.id}" %>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+               <%= button_to "Delete", [post, comment], class:"btn btn-danger", method: :delete %>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Report</a>
+          </li>
+        </ul>
+      </div>
+       <% end %>
+    </footer>
+
+     <hr />
+  <div id="comment-body-<%= comment.id %>">
+    <%= comment.body %>
+  </div>
+    <div class="flex items-center mt-4 space-x-4">
+      <button type="button" class="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400">
+        <svg class="mr-1.5 w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
+          <path
+            d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z"
+          />
+        </svg>
+        <div id="edit-form-<%= comment.id%>" class="d-none">
       <%= render 'comments/form',
        post: @post,
        comment: comment,
        submit_label: "Update" %>
     </div>
-  <% end %>
-  <hr />
-  <div id="comment-body-<%= comment.id %>">
-    <%= comment.body %>
-  </div>
-</div>
+      </button>
+    </div>
+  </article>

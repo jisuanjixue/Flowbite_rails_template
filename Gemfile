@@ -57,7 +57,7 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'htmlbeautifier'
+  gem 'htmlbeautifier', '~> 1.3', '>= 1.3.1'
   gem 'rubocop-performance', '~> 1.18'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false

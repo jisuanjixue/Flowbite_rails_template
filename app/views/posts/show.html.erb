@@ -17,9 +17,5 @@
       post: @post, 
       comment: @post.comments.build,
       submit_label: "Reply" %>
-    <% @comments.each do |comment| %>
-      <%= render 'comments/comment', 
-      post: @post, 
-      comment: comment %>
-    <% end %>
+      
   </div>
