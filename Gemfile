@@ -127,3 +127,5 @@ gem "database_validations", "~> 1.1"
 gem "strong_migrations", "~> 1.6"
 
 gem "brakeman", "~> 6.0"
+
+gem 'whenever', '~> 1.0'
