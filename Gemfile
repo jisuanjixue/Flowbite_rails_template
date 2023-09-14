@@ -57,13 +57,13 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'htmlbeautifier', '~> 1.3', '>= 1.3.1'
   gem 'rubocop-performance', '~> 1.18'
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
   gem 'erb_lint', '~> 0.4.0', require: false
   gem 'better_html', '~> 2.0', '>= 2.0.2'
+  gem "byebug"
 end
 
 group :development do
@@ -102,8 +102,6 @@ gem "noticed", "~> 1.6"
 
 gem "cable_ready", "~> 5.0"
 
-gem "byebug", "~> 11.1", groups: [:development, :test]
-
 gem "ahoy_matey", "~> 4.2"
 
 gem "wicked", "~> 2.0"
@@ -129,3 +127,5 @@ gem "strong_migrations", "~> 1.6"
 gem "brakeman", "~> 6.0"
 
 gem 'whenever', '~> 1.0'
+
+gem "ransack", "~> 4.0"

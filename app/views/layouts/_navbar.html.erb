@@ -21,6 +21,9 @@
           <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="Logo" />
         <%= link_to "BoBo blog", root_path, class: "self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white" %>
       </div>
+      <div>
+        <%= render 'search/form' %>
+      </div>
       <div class="flex items-center justify-between">
       <div data-controller="theme-change">
         <button data-action="click->theme-change#change" data-tooltip-target="tooltip-toggle" type="button"

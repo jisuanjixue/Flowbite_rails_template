@@ -2,6 +2,7 @@
 #
 
 Rails.application.routes.draw do
+  get 'search/index'
   resources :categories
   authenticated :user, ->(user) { user.admin? } do
     get 'admin', to: 'admin#index'
@@ -14,6 +15,8 @@ Rails.application.routes.draw do
     omniauth_callbacks: 'users/omniauth_callbacks',
     registrations: 'users/registrations'
   }
+
+  get 'search', to: 'search#index'
 
   resources :after_signup
 

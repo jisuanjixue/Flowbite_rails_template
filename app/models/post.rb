@@ -27,6 +27,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
+  include Ransackable
   extend FriendlyId
   validates :title, presence: true
   db_belongs_to :user
@@ -40,6 +41,9 @@ class Post < ApplicationRecord
   has_many :notifications, through: :user
 
   friendly_id :title, use: %i[slugged history finders]
+
+  RANSACK_ATTRIBUTES = %w[category_id comments_count created_at description id slug status title updated_at user_id views].freeze
+  RANSACK_ASSOCIATIONS = %w[user category ].freeze
 
   def should_generate_new_friendly_id?
     title_changed? || slug.blank?

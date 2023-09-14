@@ -10,5 +10,7 @@
 #  updated_at :datetime         not null
 #
 class Category < ApplicationRecord
+  include Ransackable
+  RANSACK_ATTRIBUTES = %w[name id].freeze
   has_many :posts, dependent: :destroy
 end
