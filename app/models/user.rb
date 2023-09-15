@@ -1,9 +1,10 @@
 # == Schema Information
-# Schema version: 20230912034307
+# Schema version: 20230915021246
 #
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  avatar                 :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  first_name             :string
@@ -55,6 +56,10 @@ class User < ApplicationRecord
   validate :validate_username
   validate :acceptable_image
   enum role: {user: 0, admin: 1} 
+
+  def full_name
+    "#{first_name.capitalize unless first_name.nil?} #{last_name.capitalize unless last_name.nil?}"
+  end
 
   after_initialize :set_default_role, if: :new_record?
 
