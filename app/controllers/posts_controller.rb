@@ -1,9 +1,13 @@
 class PostsController < ApplicationController
+  include Pagy::Backend
   before_action :authenticate_user!, except: %i[show index]
   before_action :set_post, only: %i[show edit update destroy]
  
 def index
-   @posts = Post.all.includes(:user, :rich_text_body).order(created_at: :desc)
+   @post_all = Post.all.includes(:user, :rich_text_description).order(created_at: :desc)
+   @pagy, @posts = pagy(@post_all)
+   rescue Pagy::OverflowError
+   redirect_to root_path(page: 1)
  end
 
  def show
