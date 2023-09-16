@@ -2,31 +2,36 @@
   <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
     <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Create a post</h2>
     <div>
-      <%= form_with(model: @post, data: {controller: "trix-table", trix_table_url_value: tables_path}) do |f| %>
-      <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-        <div class="sm:col-span-2 mb-2 mt-2">
-          <%= f.label :title, for: "title", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> <%= f.text_field :title, type: "text", id: "title", placeholder: "post title",
+      <%= form_with(model: @post, data: {controller: "trix-table emoji-picker", trix_table_url_value: tables_path}) do |f| %>
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <div class="sm:col-span-2 mb-2 mt-2">
+            <%= f.label :title, for: "title", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> <%= f.text_field :title, type: "text", id: "title", placeholder: "post title",
           class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
           dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
-        </div>
-        <div class="sm:col-span-2 mb-2 mt-2">
-          <%= f.label :description, for: "description", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> <%= f.rich_text_area :description, class:"block p-2.5 w-full text-sm
+          </div>
+          <div class="sm:col-span-2 mb-2 mt-2">
+            <%= content_tag(:div, "", class:"pickerContainer", data: {emoji_picker_target: "pickerContainer"}) %>
+          </div>
+          <div class="sm:col-span-2 mb-2 mt-2">
+            <%= f.label :description, for: "description", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= f.rich_text_area :description, 
+            data: {emoji_picker_target: "trixEditor"}, 
+            class:"block p-2.5 w-full text-sm
           text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
           dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+          </div>
+          <div class="sm:col-span-2 mb-2 mt-2">
+            <%= f.label :category, for: "title", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
+            <%= f.select :category_id, options_for_select(Category.all.order(name: :desc).collect { |cat| [cat.name, cat.id]}), id: "category", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
+          </div>
+          <div class="sm:col-span-2 mb-2 mt-2"><%= render "posts/image_form", form: f %></div>
         </div>
-        <div class="sm:col-span-2 mb-2 mt-2">
-          <%= f.label :category, for: "title", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %>
-          <%= f.select :category_id, options_for_select(Category.all.order(name: :desc).collect { |cat| [cat.name, cat.id]}), id: "category", class: "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" %>
-        </div>
-
-        <div class="sm:col-span-2 mb-2 mt-2"><%= render "posts/image_form", form: f %></div>
-      </div>
-      <button
+        <button
         type="submit"
         class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
       >
-        <%= f.submit "add" %>
-      </button>
+          <%= f.submit "add" %>
+        </button>
       <% end %>
     </div>
   </div>

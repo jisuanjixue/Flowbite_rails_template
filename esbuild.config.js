@@ -6,14 +6,6 @@ import http from 'http';
 import path  from 'path';
 import {stimulusPlugin} from 'esbuild-plugin-stimulus';
 
-// const chokidar = require('chokidar');
-// const esbuild = require('esbuild');
-// const rails = require('esbuild-rails');
-// const babel = require('esbuild-plugin-babel');
-// const http = require('http');
-// const path = require('path');
-// const { stimulusPlugin } = require('esbuild-plugin-stimulus');
-
 const clients = [];
 const watch = process.argv.includes('--watch');
 const watchedDirectories = [
