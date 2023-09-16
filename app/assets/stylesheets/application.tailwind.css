@@ -1,5 +1,6 @@
 
 @import "actiontext.css";
+@import "pagy.scss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
