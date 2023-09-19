@@ -5,18 +5,9 @@
   <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
     <%= link_to 'add', new_post_path %>
   </button>
+  <%= turbo_stream_from :posts %>
   <div id="posts">
-    <% @posts.each do |post| %>
-      <div id="<%= dom_id post %>">
-        <a href="" class="flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row md:max-w-xl hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-          <%# <%= image_tag(post.images[0], style:"width:300px; height: auto", class: "object-cover w-full rounded-t-lg h-96 md:h-auto md:w-48 md:rounded-none md:rounded-l-lg") %>
-          <div class="flex flex-col justify-between p-4 leading-normal">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= post.title %></h5>
-            <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><%= post.description %></p>
-          </div>
-        </a>
-      </div>
-    <% end %>
+    <%= render @posts %>
     <% if @pagy.count > @pagy.items %>
       <div class="">
         <%== pagy_nav(@pagy) %>
