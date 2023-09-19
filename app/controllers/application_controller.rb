@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit :sign_up, keys: added_attrs
     devise_parameter_sanitizer.permit :sign_in, keys: [:login, :password]
     devise_parameter_sanitizer.permit :account_update, keys:[:avatar, :username, :email, :password, :password_confirmation, { address: %i[street city state zip country] }]
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:username])
   end
 
   def set_notifications

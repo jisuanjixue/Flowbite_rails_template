@@ -131,3 +131,5 @@ gem 'whenever', '~> 1.0'
 gem "ransack", "~> 4.0"
 
 gem 'pagy', '~> 6.0' # omit patch digit
+
+gem "devise_invitable", "~> 2.0"

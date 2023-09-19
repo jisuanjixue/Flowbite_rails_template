@@ -148,6 +148,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.8)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     diff-lcs (1.5.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
@@ -448,6 +451,7 @@ DEPENDENCIES
   database_consistency
   database_validations (~> 1.1)
   devise (~> 4.9)
+  devise_invitable (~> 2.0)
   dotenv-rails
   erb_lint (~> 0.4.0)
   error_highlight (>= 0.4.0)
