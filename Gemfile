@@ -135,3 +135,15 @@ gem 'pagy', '~> 6.0' # omit patch digit
 gem "devise_invitable", "~> 2.0"
 
 gem "kamal", "~> 1.0"
+
+gem "plain-rails", "~> 0.2.0"
+
+gem "ruby-openai", "~> 4.3"
+
+gem "qdrant-ruby", "~> 0.9.4"
+
+gem "sentry-ruby", "~> 5.11"
+
+gem "sentry-rails", "~> 5.11"
+
+gem "sentry-sidekiq", "~> 5.11"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_19_064314) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_22_060736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -174,6 +174,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_064314) do
     t.index ["recipient_type", "recipient_id"], name: "index_notifications_on_recipient"
   end
 
+  create_table "plain_conversations", force: :cascade do |t|
+    t.string "subject"
+    t.datetime "pinned_at"
+    t.boolean "pinned"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "plain_messages", force: :cascade do |t|
+    t.string "role"
+    t.text "content"
+    t.bigint "plain_conversation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["plain_conversation_id"], name: "index_plain_messages_on_plain_conversation_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
@@ -228,6 +245,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_19_064314) do
   add_foreign_key "addresses", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "plain_messages", "plain_conversations"
   add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
   add_foreign_key "users", "addresses"
