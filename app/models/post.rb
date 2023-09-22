@@ -27,7 +27,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Post < ApplicationRecord
-  broadcasts_to -> (post) { :posts }
+  broadcasts_to -> (_post) { :posts }
   include Ransackable
   extend FriendlyId
   validates :title, presence: true

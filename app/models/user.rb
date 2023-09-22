@@ -69,7 +69,7 @@ class User < ApplicationRecord
   enum role: {user: 0, admin: 1} 
 
   def full_name
-    "#{first_name.capitalize unless first_name.nil?} #{last_name.capitalize unless last_name.nil?}"
+    "#{first_name&.capitalize} #{last_name&.capitalize}"
   end
 
   after_initialize :set_default_role, if: :new_record?

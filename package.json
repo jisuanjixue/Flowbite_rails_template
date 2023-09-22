@@ -27,7 +27,7 @@
   "devDependencies": {
     "@babel/core": "^7.22.15",
     "@babel/preset-env": "^7.22.15",
-    "@prettier/plugin-ruby": "^3.2.2",
+    "@prettier/plugin-ruby": "^4.0.2",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/container-queries": "^0.1.1",
     "@tailwindcss/forms": "^0.5.3",
@@ -41,7 +41,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-tailwindcss": "^3.6.2",
     "intersection-observer": "^0.12.2",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.3",
+    "prettier-plugin-erb": "^0.4.0"
   },
   "scripts": {
     "lint": "eslint --ext .js --cache .",

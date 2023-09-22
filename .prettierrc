@@ -1,7 +1,14 @@
 {
   "trailingComma": "all",
   "singleQuote": true,
-  "rubyPlugins": "plugin/single_quotes,plugin/trailing_comma",
+  "rubyPlugins": "plugin/single_quotes, plugin/trailing_comma",
   "printWidth": 200,
-  "tabWidth": 2
+  "plugins": ["@prettier/plugin-ruby", "prettier-plugin-erb"],
+  "tabWidth": 2,
+"semi": false,
+"rubyArrayLiteral": true,
+"rubyHashLabel": true,
+"rubyModifier": true,
+"rubySingleQuote": true,
+"rubyToProc": false
 }

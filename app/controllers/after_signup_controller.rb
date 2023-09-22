@@ -41,11 +41,7 @@ class AfterSignupController < ApplicationController
   private
 
   def get_address
-    if @user.address.nil?
-      Address.new
-    else
-      @user.address
-    end
+    @user.address.nil? ? Address.new : @user.address
   end
 
   def finish_wizard_path
@@ -53,14 +49,15 @@ class AfterSignupController < ApplicationController
   end
 
   def onboarding_params(step = 'sign_up')
-    permitted_attributes = case step
-                           when 'set_name'
-                             required_parameters = :user
-                             %i[username]
-                           when 'set_address'
-                             required_parameters = :address
-                             %i[street city state zip country]
-                           end
+    permitted_attributes =
+      case step
+      when 'set_name'
+        required_parameters = :user
+        %i[username]
+      when 'set_address'
+        required_parameters = :address
+        %i[street city state zip country]
+      end
     params.require(required_parameters).permit(:id, permitted_attributes).merge(form_step: step)
   end
 end
