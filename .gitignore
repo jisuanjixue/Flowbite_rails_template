@@ -50,13 +50,6 @@ yarn-debug.log*
 
 Brewfile.lock.json
 
-# Vite Ruby
-/public/vite*
-node_modules
-# Vite uses dotenv and suggests to ignore local-only env files. See
-# https://vitejs.dev/guide/env-and-mode.html#env-files
-*.local
-
 
 /config/credentials/development.key
 /app/assets/builds/*

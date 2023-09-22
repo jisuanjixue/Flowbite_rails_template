@@ -1,0 +1,97 @@
+# Name of your application. Used to uniquely configure containers.
+service: my_blog
+# Name of the container image.
+
+image: container_registry/my_blog
+
+# Deploy to these servers.
+servers:
+  web:
+    hosts:
+      - 111.11.111.11
+    labels:
+      traefik.http.routers.domain.rule: Host(`yourdomain.com`)
+      traefik.http.routers.domain.entrypoints: websecure
+      traefik.http.routers.domain.tls.certresolver: letsencrypt
+    options:
+      "add-host": host.docker.internal:host-gateway
+    cmd: "./bin/rails server"
+  job:
+    hosts:
+      - 111.11.111.11
+    options:
+      "add-host": host.docker.internal:host-gateway
+    cmd: "bundle exec sidekiq -C config/sidekiq.yml -v"
+
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  server: registry.digitalocean.com
+  username:
+    - MRSK_REGISTRY_PASSWORD
+
+  # Always use an access token rather than real password when possible.
+  password:
+    - MRSK_REGISTRY_PASSWORD
+
+# Inject ENV variables into containers (secrets come from .env).
+env:
+  clear:
+    REDIS_URL: "redis://host.docker.internal:36379/0"
+  secret:
+    - RAILS_MASTER_KEY
+    - DATABASE_PASSWORD
+    - SMTP_USER
+    - SMTP_PASSWORD
+    - DO_BUCKET_KEY
+    - DO_BUCKET_SECRET
+    - DO_BUCKET
+    - SIDEKIQ_USERNAME
+    - SIDEKIQ_PASSWORD
+# Configure builder setup.
+# builder:
+#   args:
+#     RUBY_VERSION: 3.2.0
+#   secrets:
+#     - GITHUB_TOKEN
+#   remote:
+#     arch: amd64
+#     host: ssh://app@192.168.0.1
+builder:
+  multiarch: false
+# Use accessory services (secrets come from .env).
+accessories:
+  redis:
+    image: redis:latest
+    roles:
+      - web
+    port: "36379:6379"
+    volumes:
+      - /var/lib/redis:/data
+# Configure custom arguments for Traefik
+traefik:
+  # host_port: 8080
+  options:
+    publish:
+      - "443:443"
+    volume:
+      - "/letsencrypt/acme.json:/letsencrypt/acme.json"
+  args:
+    entryPoints.web.address: ":80"
+    entryPoints.websecure.address: ":443"
+    entryPoints.web.http.redirections.entryPoint.to: websecure
+    entryPoints.web.http.redirections.entryPoint.scheme: https
+    entryPoints.web.http.redirections.entrypoint.permanent: true
+    entrypoints.websecure.http.tls: true
+    entrypoints.websecure.http.tls.domains[0].main: "yourdomain.com"
+    certificatesResolvers.letsencrypt.acme.email: "youremail@domain.com"
+    certificatesResolvers.letsencrypt.acme.storage: "/letsencrypt/acme.json"
+    certificatesResolvers.letsencrypt.acme.httpchallenge: true
+    certificatesResolvers.letsencrypt.acme.httpchallenge.entrypoint: web
+#   args:
+#     accesslog: true
+#     accesslog.format: json
+# Configure a custom healthcheck (default is /up on port 3000)
+# healthcheck:
+#   path: /healthz
+#   port: 4000
