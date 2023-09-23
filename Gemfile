@@ -147,3 +147,5 @@ gem "sentry-ruby", "~> 5.11"
 gem "sentry-rails", "~> 5.11"
 
 gem "sentry-sidekiq", "~> 5.11"
+
+gem 'mailkick', '~> 1.0', '>= 1.0.1'

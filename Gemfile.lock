@@ -239,6 +239,8 @@ GEM
       net-imap
       net-pop
       net-smtp
+    mailkick (1.2.1)
+      activesupport (>= 6.1)
     marcel (1.0.2)
     method_source (1.0.0)
     mini_magick (4.12.0)
@@ -515,6 +517,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   kamal (~> 1.0)
+  mailkick (~> 1.0, >= 1.0.1)
   noticed (~> 1.6)
   omniauth (~> 2.1, >= 2.1.1)
   omniauth-github (~> 2.0, >= 2.0.1)

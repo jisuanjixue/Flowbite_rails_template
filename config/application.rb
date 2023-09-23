@@ -23,6 +23,8 @@ module ShadcnRailsTemplate
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
+    Dir[Rails.root.join('lib/middleware/**/*.{rb}')].sort.each { |file| require file }
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
@@ -33,16 +35,16 @@ module ShadcnRailsTemplate
 
     # Don't generate system test files.
     config.active_job.queue_adapter = :sidekiq
-    config.active_job.queue_name_prefix = "an_optional_queue_prefix"
-    
+    config.active_job.queue_name_prefix = 'an_optional_queue_prefix'
+
     config.generators.after_generate do |files|
       parsable_files = files.filter { |file| file.end_with?('.rb') }
       system("bundle exec rubocop -A --fail-level=E #{parsable_files.shelljoin}", exception: true)
     end
     config.generators.system_tests = nil
 
-    config.active_record.encryption.primary_key = "Q3TJUKuOUGSZmgqaD2WZ72pQdg5Rikfn"
-    config.active_record.encryption.deterministic_key = "lYew1Q7BE98tDXdqytP3iwvJcu8dYulX"
-    config.active_record.encryption.key_derivation_salt = "9REysw2kZuLybtKjtJsIZHg8cTd2DyMT"
+    config.active_record.encryption.primary_key = 'Q3TJUKuOUGSZmgqaD2WZ72pQdg5Rikfn'
+    config.active_record.encryption.deterministic_key = 'lYew1Q7BE98tDXdqytP3iwvJcu8dYulX'
+    config.active_record.encryption.key_derivation_salt = '9REysw2kZuLybtKjtJsIZHg8cTd2DyMT'
   end
 end

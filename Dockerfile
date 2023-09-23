@@ -1,58 +1,81 @@
-# syntax = docker/dockerfile:1
+# This first and main rule that we follow in our Dockerfile is to keep it
+# without hardcoded dependencies and versions as much as possible.
+# This file is an ideal – it has zero.
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.2.2
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+# It accepts selected Ruby version as an argument.
+ARG RUBY_VERSION
 
-# Rails app lives here
+# Create new stage from ruby-slim image with selected Ruby version.
+FROM ruby:$RUBY_VERSION-slim as base
+
+# We are Rails developers, so we want to keep our app under /rails directory
 WORKDIR /rails
 
-# Set production environment
-ENV RAILS_ENV="production" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
-
+# Here is some Ruby magic and configuration options
+ENV BUNDLE_DEPLOYMENT="1" \
+  BUNDLE_PATH="/usr/local/bundle" \
+  BUNDLE_WITHOUT="development" \
+  HOME=/rails
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
-# Install packages needed to build gems
+# Install dependencies that are needed only during build stage
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config curl
+  apt-get install -y build-essential curl libpq-dev nodejs git
+
+# Install JavaScript dependencies
+ARG NODE_VERSION
+ARG YARN_VERSION
+ENV PATH=/usr/local/node/bin:$PATH
+RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
+    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
+    npm install -g yarn@$YARN_VERSION && \
+    npm install -g mjml && \
+    rm -rf /tmp/node-build-master
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
+    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git
 
+# Install node modules
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile
 
 # Copy application code
 COPY . .
 
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+ARG RAILS_ENV
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+# If you are already on Rails 7.1+,
+# then you will be able to use new SECRET_KEY_BASE_DUMMY=1 variable,
+# however below is a workaround for Rails 7.0 and below.
+RUN SECRET_KEY_BASE=1 DATABASE_URL=postgresql://dummy@localhost/dummy RAILS_ENV=$RAILS_ENV \
+  bundle exec rake assets:precompile
 
-
-# Final stage for app image
+# Start again from base image to throw away anything that is not needed
+# from build stage.
 FROM base
 
-# Install packages needed for deployment
+# Install dependencies that we needed during application run.
+# We use PostgresSQL for almost all our projects,
+# this is why we install `postgresql-client`.
+# Also almost all web applications have image upload and convert functionality,
+# so you need to install `imagemagick`.
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y libvips postgresql-client curl && \
+    apt-get install --no-install-recommends -y libvips postgresql-client imagemagick tzdata curl && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
+# Run and own the application files as a non-root user for security
+RUN useradd rails --create-home --shell /bin/bash
 
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --home /rails --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+# Copy built artifacts: node, gems, application
+COPY --from=build --chown=rails:rails /usr/local/node /usr/local/node
+COPY --from=build --chown=rails:rails /usr/local/bundle /usr/local/bundle
+COPY --from=build --chown=rails:rails /rails /rails
+RUN chown rails:rails /rails
+
 USER rails:rails
 
 # Entrypoint prepares the database.
@@ -60,3 +83,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
+CMD ["./bin/rails", "server"]
