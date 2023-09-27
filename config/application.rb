@@ -40,5 +40,9 @@ module ShadcnRailsTemplate
       system("bundle exec rubocop -A --fail-level=E #{parsable_files.shelljoin}", exception: true)
     end
     config.generators.system_tests = nil
+
+    config.active_record.encryption.primary_key = "x7uBduWzxpIGpEv6KJaIl6S3KbPq89aY"
+    config.active_record.encryption.deterministic_key = "leSN9AW7nE0d6E0du0Qy8QToFqOMy4IS"
+    config.active_record.encryption.key_derivation_salt = "GSpKicS4w0ZdGMdrI4ZeaxMrvT2gSHLX"
   end
 end
