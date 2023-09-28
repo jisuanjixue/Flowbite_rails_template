@@ -1,6 +1,5 @@
 class User < ApplicationRecord
-  has_many :wordbooks
-  has_many :word_statuses
+  has_many :word_books, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable,

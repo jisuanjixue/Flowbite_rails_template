@@ -1,0 +1,37 @@
+<section class="bg-white dark:bg-gray-900">
+  <div class="py-8 px-4 mx-auto max-w-2xl lg:py-16">
+    <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">添加单词</h2>
+    <div>
+      <%= form_with(model: [@word_book, @word_book.words.build]) do |f| %>
+        <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+          <div class="sm:col-span-2 mb-2 mt-2">
+            <%= f.label :name, for: "名称", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> <%= f.text_field :name, type: "text", id: "name", placeholder: "单词名",
+              class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+               dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+          </div>
+          <div class="sm:col-span-2 mb-2 mt-2">
+            <%= f.label :pronunciation, for: "发音", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> <%= f.text_field :pronunciation, type: "text", id: "pronunciation", placeholder: "发音",
+              class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+               dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+          </div>
+          <div class="sm:col-span-2 mb-2 mt-2">
+            <%= f.label :definition, for: "定义", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> <%= f.text_field :definition, type: "text", id: "definition", placeholder: "定义",
+              class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+               dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+          </div>
+          <div class="sm:col-span-2 mb-2 mt-2">
+            <%= f.label :example_sentence, for: "例子", class: "block mb-2 text-sm font-medium text-gray-900 dark:text-white" %> <%= f.text_field :example_sentence, type: "text", id: "example_sentence", placeholder: "例子",
+              class:"bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
+               dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" %>
+          </div>
+        </div>
+        <button
+        type="submit"
+        class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+      >
+          <%= f.submit "确定" %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</section>

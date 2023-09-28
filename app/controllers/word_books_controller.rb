@@ -6,12 +6,12 @@ class WordBooksController < ApplicationController
   end
 
   def show
-    @words = @wordbook.words
+    @words = @word_book.words
   end
 
   private
 
   def set_wordbook
-    @wordbook = current_user.wordbooks.find(params[:id])
+    @word_book = WordBook.find(params[:id])
   end
 end

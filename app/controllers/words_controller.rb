@@ -1,40 +1,53 @@
 class WordsController < ApplicationController
-  before_action :check_editable, only: [:create, :destroy]
-  before_action :set_word_book
+  before_action :set_book, only: [:create, :destroy, :new, :show, :unmastered, :mastered ]
+  before_action :set_word, only: [ :destroy, :show, :mastered, :unmastered ]
+
+  def show
+  end
+
+  def new
+  end
 
   def create
-    @word = @wordbook.words.create(word_params)
+    @word = @word_book.words.create!(word_params)
     respond_to do |format|
-      if @post.save
-        format.html { redirect_to post_url(@post), notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
+      if @word.save
+        format.html { redirect_to  word_book_path(@word_book), notice: '新单词添加成功' }
+        format.json { render :show, status: :created, location: @word }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
+        format.json { render json: @word.errors, status: :unprocessable_entity }
       end
-    redirect_to @wordbook
+    end
   end
 
   def destroy
-    @word = Word.find(params[:id])
-    @word.destroy
-    redirect_to wordbook_path(@word.wordbook)
+    @word.destroy!
+    redirect_to word_book_path(@word_book)
+  end
+
+  def mastered
+    @word.update!(status: 1)
+    redirect_to word_book_path(@word_book), notice: '单词标记已掌握'
+  end
+
+  def unmastered
+    @word.update!(status: 0)
+    redirect_to word_book_path(@word_book), notice: '单词标记未掌握.'
   end
 
   private
 
-  def check_editable
-    @wordbook = Word.find(params[:word_book_id])
-    # unless @wordbook.editable
-    #   redirect_to @wordbook, alert: 'This wordbook is not editable.'
-    # end
-  end
-
-  def set_word_book
+  def set_book
     @word_book = WordBook.find(params[:word_book_id])
   end
 
-  def word_params
-    params.require(:word).permit(:name, :pronunciation, :meaning, :example_sentence)
+  def set_word
+    @word = @word_book.words.find(params[:id])
   end
+
+  def word_params
+    params.require(:word).permit(:name, :pronunciation, :definition, :example_sentence)
+  end
+
 end

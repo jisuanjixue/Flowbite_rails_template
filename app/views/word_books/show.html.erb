@@ -1,0 +1,47 @@
+<div class="container">
+  <h1 class="text-center"><%= @word_book.name %>单词列表</h1>
+</div>
+ <% if @word_book.editable %>
+   <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+    <%= link_to '添加', new_word_book_word_path(@word_book) %>
+   </button>
+<% end %>
+<div class="relative overflow-x-auto">
+    <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    名称
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    状态
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+           <% @words.each do |word| %>
+               <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                   <%= word.name %>
+                </th>
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                   <%= word.status  %>
+                </th>
+                 <td class="px-6 py-4">
+                    <div class="items-center justify-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
+                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        <%= link_to '详情', word_book_word_path(@word_book, word) %>
+                    </a>
+                     <% if @word_book.editable %>
+                       <%= button_to "删除", [@word_book, word], method: :delete, data: { confirm: "你确定要删除吗？" }, class:"btn btn-danger" %>
+                     <% end %>
+                    </div>
+                </td>
+            </tr>
+           <% end %>
+        </tbody>
+    </table>
+</div>

@@ -11,6 +11,9 @@
   </head>
 
   <body>
-      <%= yield %>
+    <header><%= render 'layouts/navbar' %> <%= render 'layouts/alerts' %></header>
+    <main>
+      <blockquote class="text-xl italic font-semibold text-left text-gray-900 dark:text-white p-4 mt-28"><%= yield %></blockquote>
+    </main>
   </body>
 </html>

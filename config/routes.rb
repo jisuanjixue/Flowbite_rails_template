@@ -1,22 +1,20 @@
 Rails.application.routes.draw do
-  get 'words/create'
-  get 'words/destroy'
-  get 'word_books/index'
+  # get 'words/create'
+  # get 'words/destroy'
+  # get 'word_books/index'
   devise_for :users,  controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
 
-  resources :users do
-    resources :wordbooks, shallow: true do
-      resources :words
+  resources :word_books do
+    resources :words do
+      patch 'mastered', on: :member      
+      patch 'unmastered', on: :member
     end
-  end
+  end  
 
-  resources :words, only: [] do
-    resources :word_statuses, only: [:create, :update]
-  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   # get 'home/index'
   # Defines the root path route ("/")
-  root to: 'home#index'
+  root to: 'word_books#index'
 end
